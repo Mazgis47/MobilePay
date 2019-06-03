@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MobilePay.MerchantCalc
 {
-    interface ITransactionFee
+    public interface ITransactionFeeCalculator
     {
-        double GetTransactionFee();
+        double GetTransactionFee(double Amount);
     }
 }

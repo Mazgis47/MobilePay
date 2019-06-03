@@ -11,7 +11,9 @@ namespace MobilePay
     {
         static void Main(string[] args)
         {
-            var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(@"..\..\..\TransactionData\transactions.txt"));
+            var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(@"..\..\..\TransactionData\transactions.txt"
+                    , new BasicTransactionFeeCalculator()
+                  ));
             merchantFeeCalculator.CalculateFees();
         }
     }

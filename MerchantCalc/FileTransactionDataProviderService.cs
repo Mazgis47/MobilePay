@@ -11,7 +11,7 @@ namespace MobilePay.MerchantCalc
     /// <summary>
     /// Reads transactions from file
     /// </summary>
-    public class FileTransactionDataProviderService : DataProviderService, ITransactionDataProviderService
+    public class FileTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
     {
         private string _transactionsFileName;
 
@@ -19,7 +19,7 @@ namespace MobilePay.MerchantCalc
         /// Constructor
         /// </summary>
         /// <param name="transactionsFileName">Takes file name to read transactions from</param>
-        public FileTransactionDataProviderService(string transactionsFileName)
+        public FileTransactionDataProviderService(string transactionsFileName, ITransactionFeeCalculator transactionFee) :base(transactionFee)
         {
             _transactionsFileName = transactionsFileName;
         }
