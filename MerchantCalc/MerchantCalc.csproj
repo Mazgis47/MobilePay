@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicTransactionFee.cs" />
     <Compile Include="DataProviderService.cs" />
     <Compile Include="FileTransactionDataProviderService.cs" />
+    <Compile Include="ITransactionFee.cs" />
     <Compile Include="ITransactionDataProviderService.cs" />
     <Compile Include="IMerchantFeeCalculator.cs" />
     <Compile Include="MerchantFeeCalculator.cs" />
