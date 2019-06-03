@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataProviderService.cs" />
-    <Compile Include="FileDataProviderService.cs" />
-    <Compile Include="IDataProviderService.cs" />
+    <Compile Include="FileTransactionDataProviderService.cs" />
+    <Compile Include="ITransactionDataProviderService.cs" />
     <Compile Include="IMerchantFeeCalculator.cs" />
     <Compile Include="MerchantFeeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

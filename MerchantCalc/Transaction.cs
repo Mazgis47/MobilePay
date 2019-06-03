@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,14 @@ namespace MobilePay.MerchantCalc
         private double Fee { get { return Amount * 0.01; } }
         public void Process()
         {
-            if (MerchantName == null || TransactionDate == null)
-                Console.WriteLine();
+            if (IsValid())
+                Console.WriteLine(string.Format("{0} {1}\t{2}", TransactionDate.ToString("yyyy-MM-dd"), MerchantName, Fee.ToString("0.00", new CultureInfo("en-US"))));
             else
-                //Console.WriteLine($"{TransactionDate.ToString("YYYY-MM-dd")} {MerchantName}\t" + string.Format("{0}",Fee));
-                Console.WriteLine(string.Format("{0} {1}\t{2:0.00}", TransactionDate.ToString("yyyy-MM-dd"), MerchantName, Fee));
+                Console.WriteLine();
+        }
+        private bool IsValid()
+        {
+            return MerchantName != null && TransactionDate != null;
         }
     }
 }

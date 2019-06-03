@@ -8,14 +8,15 @@ namespace MobilePay.MerchantCalc
 {
     public class MerchantFeeCalculator : IMerchantFeeCalculator
     {
-        private IDataProviderService _dataProvider;
-        public MerchantFeeCalculator(IDataProviderService dataProvider)
+        private ITransactionDataProviderService _transactionDataProvider;
+        public MerchantFeeCalculator(ITransactionDataProviderService transactionDataProvider)
         {
-            _dataProvider = dataProvider;
+            _transactionDataProvider = transactionDataProvider;
         }
+
         public void CalculateFees()
         {
-            foreach (var transaction in _dataProvider.GetTransactions())
+            foreach (var transaction in _transactionDataProvider.GetTransactions())
             {
                 transaction.Process();
             }
