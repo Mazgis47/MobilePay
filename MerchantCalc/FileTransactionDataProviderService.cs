@@ -30,17 +30,28 @@ namespace MobilePay.MerchantCalc
         /// <returns></returns>
         public IEnumerable<Transaction> GetTransactions()
         {
+            try
+            {
+                return GetTransactionsFromFile();
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine($"Error occured while reading from {_transactionsFileName}: {ex.Message}");
+                throw;
+            }
+        }
+
+        private IEnumerable<Transaction> GetTransactionsFromFile()
+        {
             using (StreamReader sr = new StreamReader(_transactionsFileName))
             {
                 // Read the file string by string, and send transaction back as required.
                 while (sr.Peek() >= 0)
                 {
-                    String line = sr.ReadLine();
-                    //throw new NotImplementedException();
+                    var line = sr.ReadLine();
                     yield return GetTransaction(line);
                 }
             }
         }
-
     }
 }

@@ -34,7 +34,7 @@ namespace MobilePay.MerchantCalc
         }
         private bool IsValid()
         {
-            return MerchantName != null && TransactionDate != null;
+            return MerchantName != null && TransactionDate.Year != 0001;
         }
     }
 }

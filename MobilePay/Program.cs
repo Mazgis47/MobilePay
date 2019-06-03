@@ -11,10 +11,17 @@ namespace MobilePay
     {
         static void Main(string[] args)
         {
-            var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(@"..\..\..\TransactionData\transactions.txt"
-                    , new BasicTransactionFeeCalculator()
-                  ));
-            merchantFeeCalculator.CalculateFees();
+            try
+            {
+                var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(@"..\..\..\TransactionData\transactions.txt"
+                        , new BasicTransactionFeeCalculator()
+                      ));
+                merchantFeeCalculator.CalculateFees();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Something went wrong. Error was {ex.Message}");
+            }
         }
     }
 }

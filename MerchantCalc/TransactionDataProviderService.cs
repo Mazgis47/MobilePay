@@ -23,17 +23,29 @@ namespace MobilePay.MerchantCalc
         {
             var lineSplit = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // Return empty transaction
-            if (lineSplit.Length < 3)
-                return new Transaction(null);
+            DateTime transactionDate;
+            double amount;
+            if (IsLineChopValid(lineSplit) 
+                && DateTime.TryParseExact(lineSplit[0]
+                    , "yyyy-MM-dd"
+                    , CultureInfo.InvariantCulture
+                    , DateTimeStyles.None
+                    , out transactionDate)
+                && double.TryParse(lineSplit[2], out amount))
+                return new Transaction(_transactionFee)
+                {
+                    TransactionDate = transactionDate,
+                    MerchantName = lineSplit[1],
+                    Amount = amount,
+                };
 
-            // TODO More error handling
-            return new Transaction(_transactionFee)
-            {
-                TransactionDate = DateTime.ParseExact(lineSplit[0], "yyyy-MM-dd", CultureInfo.InvariantCulture),
-                MerchantName = lineSplit[1],
-                Amount = float.Parse(lineSplit[2]),
-            };
+            // Return empty transaction
+            return new Transaction(null);
+        }
+
+        private bool IsLineChopValid(string[] lineSplit)
+        {
+            return lineSplit.Length >= 3;
         }
 
     }
