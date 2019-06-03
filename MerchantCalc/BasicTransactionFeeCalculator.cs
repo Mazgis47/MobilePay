@@ -8,10 +8,15 @@ namespace MobilePay.MerchantCalc
 {
     public class BasicTransactionFeeCalculator : ITransactionFeeCalculator
     {
+        private double _fee;
+        public BasicTransactionFeeCalculator()
+        {
+            // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore fee is 1%
+            _fee = 1.0;
+        }
         public double GetTransactionFee(double Amount)
         {
-            // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore returning calculation of 1%
-            return Amount * 1.0 / 100;
+            return Amount * _fee / 100;
         }
     }
 }

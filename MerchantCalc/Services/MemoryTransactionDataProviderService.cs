@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 
 namespace MobilePay.MerchantCalc
 {
-    class MemoryTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
+    public class MemoryTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
     {
-        private IEnumerable<string> _transactionsList;
+        private IEnumerable<string> _transactionLineList;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="transactionsFileName">Takes list of transactions string list</param>
-        public MemoryTransactionDataProviderService(IEnumerable<string> transactionsList, ITransactionFeeCalculator transactionFee) : base(transactionFee)
+        public MemoryTransactionDataProviderService(IEnumerable<string> transactionLineList, ITransactionFeeCalculator transactionFee) : base(transactionFee)
         {
-            _transactionsList = transactionsList;
+            _transactionLineList = transactionLineList;
         }
 
         public IEnumerable<Transaction> GetTransactions()
         {
-            throw new NotImplementedException();
+            foreach (var transactionLine in _transactionLineList)
+            {
+                yield return GetTransaction(transactionLine);
+            }
         }
     }
 }

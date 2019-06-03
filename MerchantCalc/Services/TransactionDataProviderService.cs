@@ -25,13 +25,13 @@ namespace MobilePay.MerchantCalc
 
             DateTime transactionDate;
             double amount;
-            if (IsLineChopValid(lineSplit) 
-                && DateTime.TryParseExact(lineSplit[0]
-                    , "yyyy-MM-dd"
-                    , CultureInfo.InvariantCulture
-                    , DateTimeStyles.None
-                    , out transactionDate)
-                && double.TryParse(lineSplit[2], out amount))
+            if (IsLineChopValid(lineSplit)
+                    && DateTime.TryParseExact(lineSplit[0]
+                        , "yyyy-MM-dd"
+                        , CultureInfo.InvariantCulture
+                        , DateTimeStyles.None
+                        , out transactionDate)
+                    && double.TryParse(lineSplit[2], out amount))
                 return new Transaction(_transactionFee)
                 {
                     TransactionDate = transactionDate,

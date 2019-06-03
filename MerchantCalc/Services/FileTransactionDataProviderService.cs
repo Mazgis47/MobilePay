@@ -25,9 +25,9 @@ namespace MobilePay.MerchantCalc
         }
 
         /// <summary>
-        /// Yields transactions that a read from file
+        /// Handles read of transactions
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of transactions</returns>
         public IEnumerable<Transaction> GetTransactions()
         {
             try
@@ -41,6 +41,10 @@ namespace MobilePay.MerchantCalc
             }
         }
 
+        /// <summary>
+        /// Yields transactions that a read from file
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<Transaction> GetTransactionsFromFile()
         {
             using (StreamReader sr = new StreamReader(_transactionsFileName))
