@@ -12,7 +12,7 @@ namespace MobilePay.MerchantCalc
         public DateTime TransactionDate { get; set; }
         public string MerchantName { get; set; }
         public double Amount { get; set; }
-        private double Fee { get { return _transactionFee.GetTransactionFee(Amount); } }
+        private double Fee { get { return _transactionFee.GetTransactionFee(MerchantName, Amount); } }
         private ITransactionFeeCalculator _transactionFee;
 
         public Transaction(ITransactionFeeCalculator transactionFee)
@@ -27,7 +27,7 @@ namespace MobilePay.MerchantCalc
         {
             if (IsValid())
                 return string.Format("{0} {1}\t{2}", 
-                    TransactionDate.ToString("yyyy-MM-dd"), 
+                    TransactionDate.ToString("yyyy-MM-dd"),
                     MerchantName, 
                     Fee.ToString("0.00", new CultureInfo("en-US")));
             return "";
