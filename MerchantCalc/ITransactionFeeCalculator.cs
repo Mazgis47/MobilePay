@@ -8,6 +8,6 @@ namespace MobilePay.MerchantCalc
 {
     public interface ITransactionFeeCalculator
     {
-        double GetTransactionFee(double Amount);
+        double GetTransactionFee(string merchantName, double Amount);
     }
 }
