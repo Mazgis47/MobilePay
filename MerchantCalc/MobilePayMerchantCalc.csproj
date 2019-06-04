@@ -45,7 +45,6 @@
     <Compile Include="Services\IDisplayService.cs" />
     <Compile Include="TransactionFee\BasicTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\DiscountTransactionFeeCalculator.cs" />
-    <Compile Include="TransactionFee\FixedFeeTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\ITransactionFeeCalculator.cs" />
     <Compile Include="IMerchantFeeCalculator.cs" />
     <Compile Include="MerchantFeeCalculator.cs" />
