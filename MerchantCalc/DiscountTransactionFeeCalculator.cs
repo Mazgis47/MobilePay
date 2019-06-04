@@ -15,16 +15,16 @@ namespace MobilePay.MerchantCalc
             _baseTransactionFeeCalculator = baseTransactionFeeCalculator;
             _merchantDiscounts = merchantDiscounts;
         }
-        public double GetTransactionFee(string merchantName, double Amount)
+        public double GetTransactionFee(Transaction transaction)
         {
             if (_baseTransactionFeeCalculator == null)
                 throw new ArgumentNullException("Please provide valid baseTransactionFeeCalculator");
 
-            var baseFee = _baseTransactionFeeCalculator.GetTransactionFee(merchantName, Amount);
+            var baseFee = _baseTransactionFeeCalculator.GetTransactionFee(transaction);
             
             // Check if Merchant has discount - if so, then apply it, otherwise just return base fee
-            return _merchantDiscounts != null && _merchantDiscounts.ContainsKey(merchantName) ?
-                baseFee * (100 -_merchantDiscounts[merchantName]) / 100
+            return _merchantDiscounts != null && _merchantDiscounts.ContainsKey(transaction.MerchantName) ?
+                baseFee * (100 -_merchantDiscounts[transaction.MerchantName]) / 100
                 : baseFee;
         }
     }
