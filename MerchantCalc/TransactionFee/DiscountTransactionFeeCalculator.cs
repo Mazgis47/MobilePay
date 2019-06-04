@@ -11,12 +11,23 @@ namespace MobilePay.MerchantCalc
     {
         ITransactionFeeCalculator _baseTransactionFeeCalculator;
         Dictionary<string, double> _merchantDiscounts;
+
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="baseTransactionFeeCalculator">Previous Transaction Fee Calculator implementation</param>
+        /// <param name="merchantDiscounts">Dictionary of Merchant/Discount pairs</param>
         public DiscountTransactionFeeCalculator(ITransactionFeeCalculator baseTransactionFeeCalculator, Dictionary<string, double> merchantDiscounts)
         {
             _baseTransactionFeeCalculator = baseTransactionFeeCalculator;
             _merchantDiscounts = merchantDiscounts;
         }
 
+        /// <summary>
+        /// Calculates Transaction fee - applies Previous (base) fee and Merchant discount if applicable
+        /// </summary>
+        /// <param name="transaction">Transaction that requires fee calculation</param>
+        /// <returns>Calculated transaction fee</returns>
         public double GetTransactionFee(Transaction transaction)
         {
             if (_baseTransactionFeeCalculator == null)

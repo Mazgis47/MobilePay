@@ -13,6 +13,10 @@ namespace MobilePay.Entities
         public string MerchantName { get; set; }
         public double Amount { get; set; }
 
+        /// <summary>
+        /// Checks if transaction is valid
+        /// </summary>
+        /// <returns>Transaction is valid</returns>
         public bool IsValid()
         {
             return MerchantName != null && TransactionDate.Year != 0001;
@@ -47,6 +51,11 @@ namespace MobilePay.Entities
             return new Transaction();
         }
 
+        /// <summary>
+        /// Checks if provided has at least 3 chunks
+        /// </summary>
+        /// <param name="lineSplit"></param>
+        /// <returns>True if has 3 or more chunks, otherwise false</returns>
         private static bool IsLineChopValid(string[] lineSplit)
         {
             return lineSplit.Length >= 3;

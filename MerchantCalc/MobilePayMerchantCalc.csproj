@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\ConsoleDisplayService.cs" />
+    <Compile Include="Services\IDisplayService.cs" />
     <Compile Include="TransactionFee\BasicTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\DiscountTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\FixedFeeTransactionFeeCalculator.cs" />

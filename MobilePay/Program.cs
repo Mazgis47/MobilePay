@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MobilePay.MerchantCalc;
 using MobilePay.Data;
+using MobilePay.MerchantCalc.Services;
 
 namespace MobilePay
 {
@@ -21,7 +22,8 @@ namespace MobilePay
                             new DiscountTransactionFeeCalculator( // Apply Discount by Merchant and wrap...
                                 new BasicTransactionFeeCalculator(1.0), // Apply Basic fee rate 1%
                                 new Dictionary<string, double>() { { "TELIA", 10 }, { "CIRCLE_K", 20 } }), // Provide discounts by Merchants
-                            29.0) // Provide fixed monthly fee
+                            29.0), // Provide fixed monthly fee
+                        new ConsoleDisplayService() // Display on screen
                      );
                 merchantFeeCalculator.CalculateFees();
             }
@@ -33,6 +35,11 @@ namespace MobilePay
             return 0;
         }
 
+        /// <summary>
+        /// If specified on cmd line returns file name from argument list, otherwise - default
+        /// </summary>
+        /// <param name="args">cmd arguments</param>
+        /// <returns>File name</returns>
         private static string GetTransactionDataFilename(string[] args)
         {
             return args.Any() ? args[0] : transactionsDataFileName;

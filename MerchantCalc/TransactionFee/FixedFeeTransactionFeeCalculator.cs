@@ -12,6 +12,12 @@ namespace MobilePay.MerchantCalc
         ITransactionFeeCalculator _baseTransactionFeeCalculator;
         double _fixedFee;
         Dictionary<string, bool> _firstTransactionInMonth;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="baseTransactionFeeCalculator">Previous Transaction Fee Calculator implementation</param>
+        /// <param name="fixedFee">Fixed monthly fee</param>
         public FixedFeeTransactionFeeCalculator(ITransactionFeeCalculator baseTransactionFeeCalculator, double fixedFee)
         {
             _baseTransactionFeeCalculator = baseTransactionFeeCalculator;
@@ -19,6 +25,11 @@ namespace MobilePay.MerchantCalc
             _firstTransactionInMonth = new Dictionary<string, bool>();
         }
 
+        /// <summary>
+        /// Calculates Transaction fee - applies Previous (base) fee and Monthly fixed fee
+        /// </summary>
+        /// <param name="transaction">Transaction that requires fee calculation</param>
+        /// <returns>Calculated transaction fee</returns>
         public double GetTransactionFee(Transaction transaction)
         {
             if (_baseTransactionFeeCalculator == null)
