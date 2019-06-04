@@ -57,7 +57,48 @@ namespace UnitTestMerchantCalc
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(null
                             , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 10 } });
             discountTransactionFeeCalculator.GetTransactionFee(new Transaction(discountTransactionFeeCalculator)
-            { MerchantName = "DISCOUNTMERCHANT", Amount = 120 });
+                { MerchantName = "DISCOUNTMERCHANT", Amount = 120 });
+        }
+
+        [TestMethod]
+        public void ShouldCalculateFixedFeeForProvidedFee()
+        {
+            var fixedFeeTransactionFeeCalculator = new FixedFeeTransactionFeeCalculator(new BasicTransactionFeeCalculator(1), 29);
+            
+            // First transaction in the month for MERCHANT1
+            var firstTransactionInMonthMerchant1 = new Transaction(fixedFeeTransactionFeeCalculator)
+            {
+                TransactionDate = new DateTime(2018, 09, 02),
+                MerchantName = "MERCHANT1", Amount = 120
+            };
+            Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(firstTransactionInMonthMerchant1), 30.20);
+
+            // First transaction in the month for MERCHANT2
+            var firstTransactionInMonthMerchant2 = new Transaction(fixedFeeTransactionFeeCalculator)
+            {
+                TransactionDate = new DateTime(2018, 09, 04),
+                MerchantName = "MERCHANT2",
+                Amount = 200
+            };
+            Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(firstTransactionInMonthMerchant2), 31.00);
+            
+            // First transaction in the another month for MERCHANT1
+            var firstTransactionInAnotherMonthMerchant1 = new Transaction(fixedFeeTransactionFeeCalculator)
+            {
+                TransactionDate = new DateTime(2018, 10, 22),
+                MerchantName = "MERCHANT1",
+                Amount = 300
+            };
+            Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(firstTransactionInAnotherMonthMerchant1), 32.00);
+
+            // Second transaction in the another month for MERCHANT1
+            var secondTransactionInAnotherMonthMerchant1 = new Transaction(fixedFeeTransactionFeeCalculator)
+            {
+                TransactionDate = new DateTime(2018, 10, 29),
+                MerchantName = "MERCHANT1",
+                Amount = 150
+            };
+            Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(secondTransactionInAnotherMonthMerchant1), 1.50);
         }
     }
 }
