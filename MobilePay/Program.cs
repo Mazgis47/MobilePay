@@ -18,11 +18,8 @@ namespace MobilePay
             {
                 var merchantFeeCalculator = new MerchantFeeCalculator(
                         new FileTransactionDataProviderService(GetTransactionDataFilename(args)), // Take data from file
-                            new DiscountTransactionFeeCalculator( // Apply Discount by Merchant and wrap...
-                                new BasicTransactionFeeCalculator(1.0), // Apply Basic fee rate 1%
-                                new Dictionary<string, double>() { { "TELIA", 10 } }) // Provide discounts by Merchants
-                            ,
-                        new ConsoleDisplayService()); // Display on screen
+                             new BasicTransactionFeeCalculator(1.0), // Apply Basic fee rate 1%
+                             new ConsoleDisplayService()); // Display on screen
                 merchantFeeCalculator.CalculateFees();
             }
             catch (Exception ex)
