@@ -27,7 +27,8 @@ namespace UnitTestMerchantCalc
         {
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
                             , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 10 } });
-            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee("DISCOUNTMERCHANT", 120), 1.08);
+            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee(new Transaction(discountTransactionFeeCalculator)
+                { MerchantName = "DISCOUNTMERCHANT", Amount = 120 }), 1.08);
         }
 
         [TestMethod]
@@ -35,7 +36,8 @@ namespace UnitTestMerchantCalc
         {
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
                             , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 10 } });
-            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee("ANY_OTHER", 120), 1.20);
+            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee(new Transaction(discountTransactionFeeCalculator)
+            { MerchantName = "ANY_OTHER", Amount = 120 }), 1.20);
         }
 
         [TestMethod]
@@ -45,7 +47,8 @@ namespace UnitTestMerchantCalc
         {
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(null
                             , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 10 } });
-            discountTransactionFeeCalculator.GetTransactionFee("ANY_OTHER", 120);
+            discountTransactionFeeCalculator.GetTransactionFee(new Transaction(discountTransactionFeeCalculator)
+            { MerchantName = "DISCOUNTMERCHANT", Amount = 120 });
         }
     }
 }
