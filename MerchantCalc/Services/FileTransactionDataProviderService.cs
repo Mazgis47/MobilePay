@@ -11,7 +11,7 @@ namespace MobilePay.MerchantCalc
     /// <summary>
     /// Reads transactions from file
     /// </summary>
-    public class FileTransactionDataProviderService : DataProviderService, ITransactionDataProviderService
+    public class FileTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
     {
         private string _transactionsFileName;
 
@@ -19,28 +19,43 @@ namespace MobilePay.MerchantCalc
         /// Constructor
         /// </summary>
         /// <param name="transactionsFileName">Takes file name to read transactions from</param>
-        public FileTransactionDataProviderService(string transactionsFileName)
+        public FileTransactionDataProviderService(string transactionsFileName, ITransactionFeeCalculator transactionFee) :base(transactionFee)
         {
             _transactionsFileName = transactionsFileName;
+        }
+
+        /// <summary>
+        /// Handles read of transactions
+        /// </summary>
+        /// <returns>List of transactions</returns>
+        public IEnumerable<Transaction> GetTransactions()
+        {
+            try
+            {
+                return GetTransactionsFromFile();
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine($"Error occured while reading from {_transactionsFileName}: {ex.Message}");
+                throw;
+            }
         }
 
         /// <summary>
         /// Yields transactions that a read from file
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Transaction> GetTransactions()
+        private IEnumerable<Transaction> GetTransactionsFromFile()
         {
             using (StreamReader sr = new StreamReader(_transactionsFileName))
             {
                 // Read the file string by string, and send transaction back as required.
                 while (sr.Peek() >= 0)
                 {
-                    String line = sr.ReadLine();
-                    //throw new NotImplementedException();
+                    var line = sr.ReadLine();
                     yield return GetTransaction(line);
                 }
             }
         }
-
     }
 }

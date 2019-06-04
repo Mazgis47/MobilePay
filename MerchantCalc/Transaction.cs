@@ -12,17 +12,29 @@ namespace MobilePay.MerchantCalc
         public DateTime TransactionDate { get; set; }
         public string MerchantName { get; set; }
         public double Amount { get; set; }
-        private double Fee { get { return Amount * 0.01; } }
+        private double Fee { get { return _transactionFee.GetTransactionFee(this); } }
+        private ITransactionFeeCalculator _transactionFee;
+
+        public Transaction(ITransactionFeeCalculator transactionFee)
+        {
+            _transactionFee = transactionFee;
+        }
         public void Process()
         {
+            Console.WriteLine(ToString());
+        }
+        public override string ToString()
+        {
             if (IsValid())
-                Console.WriteLine(string.Format("{0} {1}\t{2}", TransactionDate.ToString("yyyy-MM-dd"), MerchantName, Fee.ToString("0.00", new CultureInfo("en-US"))));
-            else
-                Console.WriteLine();
+                return string.Format("{0} {1}\t{2}", 
+                    TransactionDate.ToString("yyyy-MM-dd"),
+                    MerchantName, 
+                    Fee.ToString("0.00", new CultureInfo("en-US")));
+            return "";
         }
         private bool IsValid()
         {
-            return MerchantName != null && TransactionDate != null;
+            return MerchantName != null && TransactionDate.Year != 0001;
         }
     }
 }
