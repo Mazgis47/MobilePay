@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicTransactionFeeCalculator.cs" />
+    <Compile Include="DiscountTransactionFeeCalculator.cs" />
     <Compile Include="Services\MemoryTransactionDataProviderService.cs" />
     <Compile Include="Services\TransactionDataProviderService.cs" />
     <Compile Include="Services\FileTransactionDataProviderService.cs" />
