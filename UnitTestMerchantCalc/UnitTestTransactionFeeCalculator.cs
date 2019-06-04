@@ -114,5 +114,18 @@ namespace UnitTestMobilePayMerchantCalc
             };
             Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(secondTransactionInAnotherMonthMerchant1), 1.50);
         }
+
+        [TestMethod]
+        public void ShouldCalculateNotIncludeFixedFeeFor0Fee()
+        {
+            var fixedFeeTransactionFeeCalculator = new FixedFeeTransactionFeeCalculator(new BasicTransactionFeeCalculator(1), 29);
+            var firstTransactionInMonthMerchant1 = new Transaction
+            {
+                TransactionDate = new DateTime(2018, 09, 02),
+                MerchantName = "MERCHANT1",
+                Amount = 0
+            };
+            Assert.AreEqual(fixedFeeTransactionFeeCalculator.GetTransactionFee(firstTransactionInMonthMerchant1), 0);
+        }
     }
 }

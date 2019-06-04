@@ -38,12 +38,11 @@ namespace MobilePay.MerchantCalc
             var baseFee = _baseTransactionFeeCalculator.GetTransactionFee(transaction);
             var merchantNewMonthKey = $"{transaction.MerchantName}_{transaction.TransactionDate.Month}";
             
-            // Check if Merchant already paid this month - if so, then only apply base fee
-            if (_firstTransactionInMonth.ContainsKey(merchantNewMonthKey))
+            // Check if Merchant already paid this month or fee = 0, if so, then only apply base fee
+            if (_firstTransactionInMonth.ContainsKey(merchantNewMonthKey) || baseFee == 0)
                 return baseFee;
 
             // Mark monthly fee for this merchant and add fixed fee. 
-            // TODO: remove old entries for this merchant from dictionary if too many.
             _firstTransactionInMonth.Add(merchantNewMonthKey, true);
             return baseFee + _fixedFee;
         }
