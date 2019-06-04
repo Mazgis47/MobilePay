@@ -45,7 +45,7 @@ namespace MobilePay.Data
         /// <summary>
         /// Yields transactions that a read from file
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Transaction enumeration</returns>
         private IEnumerable<Transaction> GetTransactionsFromFile()
         {
             using (StreamReader sr = new StreamReader(_transactionsFileName))
