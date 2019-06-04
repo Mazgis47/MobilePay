@@ -5,21 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePay.MerchantCalc
+namespace MobilePay.Entities
 {
-    public abstract class TransactionDataProviderService
+    public class Transaction
     {
-        protected ITransactionFeeCalculator _transactionFee;
-        public TransactionDataProviderService(ITransactionFeeCalculator transactionFee)
+        public DateTime TransactionDate { get; set; }
+        public string MerchantName { get; set; }
+        public double Amount { get; set; }
+
+        public bool IsValid()
         {
-            _transactionFee = transactionFee;
+            return MerchantName != null && TransactionDate.Year != 0001;
         }
+
         /// <summary>
         /// Converts string line into Transaction object
         /// </summary>
         /// <param name="line">Line to convert</param>
         /// <returns>Transaction object</returns>
-        public Transaction GetTransaction(string line)
+        public static Transaction GetTransaction(string line)
         {
             var lineSplit = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -32,7 +36,7 @@ namespace MobilePay.MerchantCalc
                         , DateTimeStyles.None
                         , out transactionDate)
                     && double.TryParse(lineSplit[2], out amount))
-                return new Transaction(_transactionFee)
+                return new Transaction
                 {
                     TransactionDate = transactionDate,
                     MerchantName = lineSplit[1],
@@ -40,13 +44,12 @@ namespace MobilePay.MerchantCalc
                 };
 
             // Return empty transaction
-            return new Transaction(null);
+            return new Transaction();
         }
 
-        private bool IsLineChopValid(string[] lineSplit)
+        private static bool IsLineChopValid(string[] lineSplit)
         {
             return lineSplit.Length >= 3;
         }
-
     }
 }

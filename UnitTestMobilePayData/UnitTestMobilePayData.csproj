@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85554423-F729-49DD-993F-794B8695410E}</ProjectGuid>
+    <ProjectGuid>{FAF192C3-D72E-48A7-95C8-FAF219031617}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestMerchantCalc</RootNamespace>
-    <AssemblyName>UnitTestMerchantCalc</AssemblyName>
+    <RootNamespace>UnitTestMobilePayData</RootNamespace>
+    <AssemblyName>UnitTestMobilePayData</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,18 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestTransactionFeeCalculator.cs" />
-    <Compile Include="UnitTestTransactionDataProviderService.cs" />
-    <Compile Include="UnitTestTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestTransactionDataProviderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MerchantCalc\MerchantCalc.csproj">
-      <Project>{d4fcfc3a-ad42-425f-8682-f53293e9415e}</Project>
-      <Name>MerchantCalc</Name>
+    <ProjectReference Include="..\MobilePayData\MobilePayData.csproj">
+      <Project>{bf7a1d79-6105-4867-abcf-9e75a45b48cf}</Project>
+      <Name>MobilePayData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MobilePayEntities\MobilePayEntities.csproj">
+      <Project>{ad2da5a6-7f27-44bb-a6cb-84af4cd6fc96}</Project>
+      <Name>MobilePayEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

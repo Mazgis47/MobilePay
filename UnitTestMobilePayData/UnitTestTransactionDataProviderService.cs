@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MobilePay.MerchantCalc;
+using MobilePay.Data;
+using MobilePay.Entities;
 
-namespace UnitTestMerchantCalc
+namespace UnitTestMobilePayData
 {
     [TestClass]
     public class UnitTestTransactionDataProviderService
@@ -13,8 +14,7 @@ namespace UnitTestMerchantCalc
         public void TestTransactionsCreated()
         {
             var transactionLineArray = new string[] { "2018-09-02 CIRCLE_K 120", "2018-09-04 TELIA    200" };
-            var memoryTransactionDataProviderService = new MemoryTransactionDataProviderService(transactionLineArray,
-                new BasicTransactionFeeCalculator());
+            var memoryTransactionDataProviderService = new MemoryTransactionDataProviderService(transactionLineArray);
             IEnumerable<Transaction> transactions = memoryTransactionDataProviderService.GetTransactions();
             Assert.IsTrue(transactions.Count() == 2);
             Assert.AreEqual(transactions.First().TransactionDate.Month, 9);

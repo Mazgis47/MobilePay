@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePay.Entities;
 
-namespace MobilePay.MerchantCalc
+namespace MobilePay.Data
 {
     /// <summary>
     /// Reads transactions from file
     /// </summary>
-    public class FileTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
+    public class FileTransactionDataProviderService : ITransactionDataProviderService
     {
         private string _transactionsFileName;
 
@@ -19,7 +20,7 @@ namespace MobilePay.MerchantCalc
         /// Constructor
         /// </summary>
         /// <param name="transactionsFileName">Takes file name to read transactions from</param>
-        public FileTransactionDataProviderService(string transactionsFileName, ITransactionFeeCalculator transactionFee) :base(transactionFee)
+        public FileTransactionDataProviderService(string transactionsFileName)
         {
             _transactionsFileName = transactionsFileName;
         }
@@ -53,7 +54,7 @@ namespace MobilePay.MerchantCalc
                 while (sr.Peek() >= 0)
                 {
                     var line = sr.ReadLine();
-                    yield return GetTransaction(line);
+                    yield return Transaction.GetTransaction(line);
                 }
             }
         }

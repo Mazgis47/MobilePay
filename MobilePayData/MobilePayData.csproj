@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BACF8DB5-D28B-4506-A169-2B7A4FC69D86}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>MobilePay</RootNamespace>
-    <AssemblyName>MobilePay</AssemblyName>
+    <ProjectGuid>{BF7A1D79-6105-4867-ABCF-9E75A45B48CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MobilePay.Data</RootNamespace>
+    <AssemblyName>MobilePayData</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,20 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FileTransactionDataProviderService.cs" />
+    <Compile Include="Services\ITransactionDataProviderService.cs" />
+    <Compile Include="Services\MemoryTransactionDataProviderService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MerchantCalc\MobilePayMerchantCalc.csproj">
-      <Project>{d4fcfc3a-ad42-425f-8682-f53293e9415e}</Project>
-      <Name>MobilePayMerchantCalc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MobilePayData\MobilePayData.csproj">
-      <Project>{bf7a1d79-6105-4867-abcf-9e75a45b48cf}</Project>
-      <Name>MobilePayData</Name>
+    <ProjectReference Include="..\MobilePayEntities\MobilePayEntities.csproj">
+      <Project>{ad2da5a6-7f27-44bb-a6cb-84af4cd6fc96}</Project>
+      <Name>MobilePayEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

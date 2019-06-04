@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePay.Entities;
 
-namespace MobilePay.MerchantCalc
+namespace MobilePay.Data
 {
-    public class MemoryTransactionDataProviderService : TransactionDataProviderService, ITransactionDataProviderService
+    public class MemoryTransactionDataProviderService : ITransactionDataProviderService
     {
         private IEnumerable<string> _transactionLineList;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="transactionsFileName">Takes list of transactions string list</param>
-        public MemoryTransactionDataProviderService(IEnumerable<string> transactionLineList, ITransactionFeeCalculator transactionFee) : base(transactionFee)
+        public MemoryTransactionDataProviderService(IEnumerable<string> transactionLineList)
         {
             _transactionLineList = transactionLineList;
         }
@@ -22,7 +23,7 @@ namespace MobilePay.MerchantCalc
         {
             foreach (var transactionLine in _transactionLineList)
             {
-                yield return GetTransaction(transactionLine);
+                yield return Transaction.GetTransaction(transactionLine);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePay.Entities;
 
 namespace MobilePay.MerchantCalc
 {
@@ -11,12 +12,11 @@ namespace MobilePay.MerchantCalc
         private double _fee;
         public BasicTransactionFeeCalculator()
         {
-            // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore fee is 1%
+            // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore we set as default to 1%
             _fee = 1.0;
         }
         public BasicTransactionFeeCalculator(double fee)
         {
-            // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore fee is 1%
             _fee = fee;
         }
         public double GetTransactionFee(Transaction transaction)
