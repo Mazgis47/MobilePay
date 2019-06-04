@@ -1,0 +1,1 @@
+Every story implemented in branches MOBILEPAY-1 to MOBILEPAY-5
