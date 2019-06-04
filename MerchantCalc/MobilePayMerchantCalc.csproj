@@ -41,21 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\ConsoleDisplayService.cs" />
+    <Compile Include="Services\IDisplayService.cs" />
     <Compile Include="TransactionFee\BasicTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\DiscountTransactionFeeCalculator.cs" />
     <Compile Include="TransactionFee\FixedFeeTransactionFeeCalculator.cs" />
-    <Compile Include="Services\MemoryTransactionDataProviderService.cs" />
-    <Compile Include="Services\TransactionDataProviderService.cs" />
-    <Compile Include="Services\FileTransactionDataProviderService.cs" />
     <Compile Include="TransactionFee\ITransactionFeeCalculator.cs" />
-    <Compile Include="Services\ITransactionDataProviderService.cs" />
     <Compile Include="IMerchantFeeCalculator.cs" />
     <Compile Include="MerchantFeeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionFee\TransactionFee.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Services\README.md" />
+    <ProjectReference Include="..\MobilePayData\MobilePayData.csproj">
+      <Project>{bf7a1d79-6105-4867-abcf-9e75a45b48cf}</Project>
+      <Name>MobilePayData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MobilePayEntities\MobilePayEntities.csproj">
+      <Project>{ad2da5a6-7f27-44bb-a6cb-84af4cd6fc96}</Project>
+      <Name>MobilePayEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePay.Entities;
 
-namespace MobilePay.MerchantCalc
+namespace MobilePay.Data
 {
     public interface ITransactionDataProviderService
     {
