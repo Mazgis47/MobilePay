@@ -17,8 +17,8 @@ namespace MobilePay
             {
                 var merchantFeeCalculator = new MerchantFeeCalculator(
                         new FileTransactionDataProviderService(GetTransactionDataFilename(args)), // Take data from file
-                        new FixedFeeTransactionFeeCalculator(   // Apply fixed fee
-                            new DiscountTransactionFeeCalculator( // Apply Discount by Merchant
+                        new FixedFeeTransactionFeeCalculator(   // Apply fixed fee and wrap...
+                            new DiscountTransactionFeeCalculator( // Apply Discount by Merchant and wrap...
                                 new BasicTransactionFeeCalculator(1.0), // Apply Basic fee rate 1%
                                 new Dictionary<string, double>() { { "TELIA", 10 }, { "CIRCLE_K", 20 } }), // Provide discounts by Merchants
                             29.0) // Provide fixed monthly fee
