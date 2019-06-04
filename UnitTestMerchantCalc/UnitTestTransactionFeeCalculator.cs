@@ -13,5 +13,11 @@ namespace UnitTestMerchantCalc
             var basicTransactionFeeCalculator = new BasicTransactionFeeCalculator();
             Assert.AreEqual(basicTransactionFeeCalculator.GetTransactionFee(100), 1);
         }
+        [TestMethod]
+        public void ShouldCalculateByProvidedFee()
+        {
+            var basicTransactionFeeCalculator = new BasicTransactionFeeCalculator(2);
+            Assert.AreEqual(basicTransactionFeeCalculator.GetTransactionFee(100), 2);
+        }
     }
 }
