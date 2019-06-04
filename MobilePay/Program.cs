@@ -15,14 +15,16 @@ namespace MobilePay
             try
             {
                 var merchantFeeCalculator = new MerchantFeeCalculator(
-                        new FileTransactionDataProviderService(GetTransactionDataFilename(args),
-                        new FixedFeeTransactionFeeCalculator(
-                            new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
-                                , new Dictionary<string, double>() {  { "TELIA", 10 }, { "CIRCLE_K", 20 } }), 29)
+                        new FileTransactionDataProviderService(GetTransactionDataFilename(args), // Take data from file
+                        new FixedFeeTransactionFeeCalculator(   //Apply fixed fee
+                            new DiscountTransactionFeeCalculator( // Apply Discount by Merchant
+                                new BasicTransactionFeeCalculator(1), // Apply Basic fee rate
+                                new Dictionary<string, double>() { { "TELIA", 10 }, { "CIRCLE_K", 20 } }), // Provide discounts by Merchants
+                            29.0) // Provide fixed monthly rate
                       ));
                 merchantFeeCalculator.CalculateFees();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Something went wrong. Error was {ex.Message}");
                 return 10;
