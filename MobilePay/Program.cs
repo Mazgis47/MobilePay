@@ -9,12 +9,12 @@ namespace MobilePay
 {
     class Program
     {
-        static void Main(string[] args)
+        const string transactionsDataFileName = @"..\..\..\TransactionData\transactions.txt";
+        static int Main(string[] args)
         {
-            const string transactionsDataFileName = @"..\..\..\TransactionData\transactions.txt";
             try
             {
-                var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(transactionsDataFileName,
+                var merchantFeeCalculator = new MerchantFeeCalculator(new FileTransactionDataProviderService(GetTransactionDataFilename(args),
                         new BasicTransactionFeeCalculator()
                       ));
                 merchantFeeCalculator.CalculateFees();
@@ -22,7 +22,14 @@ namespace MobilePay
             catch(Exception ex)
             {
                 Console.WriteLine($"Something went wrong. Error was {ex.Message}");
+                return 10;
             }
+            return 0;
+        }
+
+        private static string GetTransactionDataFilename(string[] args)
+        {
+            return args.Any() ? args[0] : transactionsDataFileName;
         }
     }
 }
