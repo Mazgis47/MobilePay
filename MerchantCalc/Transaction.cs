@@ -12,7 +12,7 @@ namespace MobilePay.MerchantCalc
         public DateTime TransactionDate { get; set; }
         public string MerchantName { get; set; }
         public double Amount { get; set; }
-        private double Fee { get { return _transactionFee.GetTransactionFee(MerchantName, Amount); } }
+        private double Fee { get { return _transactionFee.GetTransactionFee(this); } }
         private ITransactionFeeCalculator _transactionFee;
 
         public Transaction(ITransactionFeeCalculator transactionFee)
