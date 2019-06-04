@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobilePay.MerchantCalc
 {
-    class FixedFeeTransactionFeeCalculator : ITransactionFeeCalculator
+    public class FixedFeeTransactionFeeCalculator : ITransactionFeeCalculator
     {
         ITransactionFeeCalculator _baseTransactionFeeCalculator;
         double _fixedFee;
@@ -18,18 +18,18 @@ namespace MobilePay.MerchantCalc
             _firstTransactionInMonth = new Dictionary<string, bool>();
         }
 
-        public double GetTransactionFee(string merchantName, double Amount)
+        public double GetTransactionFee(Transaction transaction)
         {
             if (_baseTransactionFeeCalculator == null)
                 throw new ArgumentNullException("Please provide valid baseTransactionFeeCalculator");
 
-            var baseFee = _baseTransactionFeeCalculator.GetTransactionFee(merchantName, Amount);
-            //var merchantNewMonthKey = $"{merchantName}_{}";
+            var baseFee = _baseTransactionFeeCalculator.GetTransactionFee(transaction);
+            var merchantNewMonthKey = $"{transaction.MerchantName}_{transaction.TransactionDate.Month}";
             // Check if Merchant has discount - if so, then apply it, otherwise just return base fee
-            //return _merchantDiscounts.ContainsKey(merchantName) ?
-            //    baseFee * (100 - _merchantDiscounts[merchantName]) / 100
-            //    : baseFee;
-            throw new NotImplementedException();
+            if (_firstTransactionInMonth.ContainsKey(merchantNewMonthKey))
+                return baseFee;
+            _firstTransactionInMonth.Add(merchantNewMonthKey, true);
+            return baseFee + _fixedFee;
         }
     }
 }
