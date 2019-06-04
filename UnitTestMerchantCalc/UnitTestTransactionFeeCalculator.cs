@@ -36,7 +36,8 @@ namespace UnitTestMerchantCalc
         {
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
                             , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 20 } });
-            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee("DISCOUNTMERCHANT", 120), 0.96);
+            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee(new Transaction(discountTransactionFeeCalculator)
+                { MerchantName = "DISCOUNTMERCHANT", Amount = 120 }), 0.96);
         }
 
         [TestMethod]
