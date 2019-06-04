@@ -16,6 +16,7 @@ namespace MobilePay.MerchantCalc
             _baseTransactionFeeCalculator = baseTransactionFeeCalculator;
             _merchantDiscounts = merchantDiscounts;
         }
+
         public double GetTransactionFee(Transaction transaction)
         {
             if (_baseTransactionFeeCalculator == null)

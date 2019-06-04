@@ -31,7 +31,8 @@ namespace MobilePay.MerchantCalc
             if (_firstTransactionInMonth.ContainsKey(merchantNewMonthKey))
                 return baseFee;
 
-            // Mark monthly fee for this merchant and add 
+            // Mark monthly fee for this merchant and add fixed fee. 
+            // TODO: remove old entries for this merchant from dictionary if too many.
             _firstTransactionInMonth.Add(merchantNewMonthKey, true);
             return baseFee + _fixedFee;
         }

@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePayData", "MobilePayD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePayEntities", "MobilePayEntities\MobilePayEntities.csproj", "{AD2DA5A6-7F27-44BB-A6CB-84AF4CD6FC96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProjectMobilePayEntities", "UnitTestProjectMobilePayEntities\UnitTestProjectMobilePayEntities.csproj", "{E498BEDA-2D93-49F7-B1A6-D5E67BBDBAFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestMobilePayEntities", "UnitTestProjectMobilePayEntities\UnitTestMobilePayEntities.csproj", "{E498BEDA-2D93-49F7-B1A6-D5E67BBDBAFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestMobilePayData", "UnitTestMobilePayData\UnitTestMobilePayData.csproj", "{FAF192C3-D72E-48A7-95C8-FAF219031617}"
 EndProject
