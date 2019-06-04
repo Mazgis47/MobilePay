@@ -19,9 +19,9 @@ namespace MobilePay.MerchantCalc
             // No definition of what transatction fee should be in Epic MOBILEPAY-1, therefore fee is 1%
             _fee = fee;
         }
-        public double GetTransactionFee(string merchantName, double Amount)
+        public double GetTransactionFee(Transaction transaction)
         {
-            return Amount * _fee / 100;
+            return transaction.Amount * _fee / 100;
         }
     }
 }

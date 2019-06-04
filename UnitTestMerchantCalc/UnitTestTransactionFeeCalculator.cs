@@ -11,7 +11,7 @@ namespace UnitTestMerchantCalc
         public void ShouldCalculateByDefaultFee()
         {
             var basicTransactionFeeCalculator = new BasicTransactionFeeCalculator();
-            Assert.AreEqual(basicTransactionFeeCalculator.GetTransactionFee("Any", 100), 1);
+            Assert.AreEqual(basicTransactionFeeCalculator.GetTransactionFee(new Transaction(basicTransactionFeeCalculator) { MerchantName = "Any", Amount = 100 } ), 1);
         }
         [TestMethod]
         public void ShouldCalculateByProvidedFee()
