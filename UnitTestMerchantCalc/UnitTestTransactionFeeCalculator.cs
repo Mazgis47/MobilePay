@@ -31,6 +31,14 @@ namespace UnitTestMerchantCalc
         }
 
         [TestMethod]
+        public void ShouldCalculateDiscountForProvidedFee20()
+        {
+            var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
+                            , new Dictionary<string, double>() { { "DISCOUNTMERCHANT", 20 } });
+            Assert.AreEqual(discountTransactionFeeCalculator.GetTransactionFee("DISCOUNTMERCHANT", 120), 0.96);
+        }
+
+        [TestMethod]
         public void ShouldNotCalculateDiscountForProvidedFee()
         {
             var discountTransactionFeeCalculator = new DiscountTransactionFeeCalculator(new BasicTransactionFeeCalculator(1)
